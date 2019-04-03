@@ -1,0 +1,264 @@
+                                        BAB CLASS DAN OBJECT
+
+
+class = kerangka yang terdiri dari method dan properti untuk membentuk suatu objek
+objek = sesuatu yang dapat dibedakan satu samalain
+method = fungsi/prosedur yangdibuat didalam suatu class(contoh ingin mengertiumur seseorang dari TTL)
+Instance = salinan class dari nilai sebenarnya atau biasa disebut object class tertentu
+properti = data yang ada pada class.contoh class laptop memiliki properti(merk,warna)
+set = mengisi
+get = mengambil
+untuk mengakses string pada python = panjang karakter - 1
+from datetime import datetime
+sekarang = datetime.now
+
+
+contoh kelas:
+1.#INPUTNYA
+from datetime import datetime
+
+sekarang = datetime.now()
+tahun = sekarang.year
+bulan = sekarang.month
+hari = sekarang.day
+
+class pegawai :
+    def __init__(self,nomor,nama,tgllhr,blnlhr,thnlhr):
+        self.nomor = nomor
+        self.nama = nama
+        self.tgllhr = tgllhr
+        self.blnlhr = blnlhr
+        self.thnlhr = thnlhr
+        
+    def hitungumur(self):
+        self.umur = tahun - self.thnlhr
+        if(self.blnlhr == bulan):
+            if(self.tgl > hari):
+                self.umur= self.umur-1
+        elif(self.blnlhr > bulan):
+            self.umur= self.umur-1
+        
+    def hasil(self):
+        print("nama :",self.nama)
+        print("nomor:",self.nomor)
+        print("umur :",self.umur,"\n")
+        
+p1 = pegawai("23456","andin",12,8,2000)
+p1.hitungumur()
+p1.hasil()
+        
+#OUTPUTNYA
+nama : andin
+nomor: 23456
+umur : 18 
+
+
+
+
+                                    BAB INHERITANCE DAN TYPE
+                                                                                                                               
+inheritance atau pewarisan turunan
+setiap class yang kita buat, menggunakan inheritance, semua class dan subclass merupakan objek
+Pada class berisi data dan behavior, tapi tidak semua objek oleh python 
+Bila kita tidak mewarisi (inherit) dari class yang lain, class yang kita buat tetap mewarisi dari objek, walaupun kita tetap bisa menggunakan objek (object) seperti syntax dibawah ini:
+
+class subClassSatu(object):
+     pass
+
+Pada python 3 semua class secara otomatis mewarisi dari objek, walaupun kita tidak memberikan superclass nya. 
+Superclass adalah parent class, atau class yang ada diatasnya sebagai yang memberikan warisan.
+Pada subClass bisa mengakses ke metode-metode yang ada pada superclass yaitu class object, semua yang ada pada class object dapat dipergunakan oleh subClass, tetapi yang ada di class subClass tidak dapat dipergunakan oleh class object.
+CONTOH NYA:
+1.#INPUTNTA
+class user:
+    name =""
+    def __init__(self,name):
+        self.name = name
+    def printname(self):
+        print("name: ", self.name)
+class programmer(user):
+    def __init__(self,name):
+        self.name = name
+    def dopython(self):
+        print("programming python")
+brian = user("brian")
+brian.printname()
+diana = programmer("diana")
+diana.printname()
+diana.dopython()
+
+#OUTPUTNYA
+name:  brian
+name:  diana
+programming python
+
+
+2.#INPUTNYA
+class fish:
+    def __init__(self,first_name,last_name="fish",skeleton="bone",eyelids="false"):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.skeleton = skeleton
+        self.eyelids = eyelids
+    def swim(self):
+        print("the fish is swimming")
+    def swim_backwards(self):
+        print("the fish can swim backwards")
+class trout(fish):
+    pass
+class clownfish(fish):
+    def live_with_anemone(self):
+        print("the clown fish is coexisting with see anemone")
+class trout(fish):
+    pass
+terry = trout("terry")
+print(terry.first_name + "" + terry.last_name)
+print(terry.skeleton)
+print(terry.eyelids)
+terry.swim()
+terry.swim_backwards()
+casey = clownfish("casey")
+print(casey.first_name + "" + casey.last_name)
+casey.swim()
+casey.live_with_anemone()
+
+
+#OUPUTNYA
+terryfish
+bone
+false
+the fish is swimming
+the fish can swim backwards
+caseyfish
+the fish is swimming
+the clown fish is coexisting with see anemone
+
+
+
+
+
+                                           BAB POLYMORPHISME
+                                           
+polymorphisme pada class dan objek masing masing properti sudah terisi
+set untuk menuliskan
+get untuk mengambil
+polymorphisme adalah sama dengan inheritance tetapi behaviournya berbeda
+poly = banyak
+phisme = bentuk
+kalau didalam kelas = function dan method
+kalau diluar kelas = function saja
+polymophisme memanggil function saja
+abstrak class method tidak difenisikan dengan jelas,tetapi definisikan dengan jelas di anak class
+CONTOHNYA
+1.#INPUTNYA
+class shark():
+    def swim(self):
+        print("the shark is swimming")
+    def swim_backwards(self):
+        print("the shark cannot swim backwards,but can sink backwards")
+    def skeleton(self):
+        print("the shark skeleton is made cartilage")
+class clownfish():
+    def swim(self):
+        print("the clownfis is swimming")
+    def swim_backwards(self):
+        print("the clownfis can swim backwards")
+    def skeleton(self):
+        print("the clownfish skeleton is made of bone")
+sammy = shark()
+sammy.skeleton()
+
+cassey = clownfish()
+cassey.skeleton()
+
+def in_the_passific(fish):
+    fish.swim()
+in_the_passific(sammy)
+in_the_passific(cassey)
+
+#OUTPUTNYA
+the shark skeleton is made cartilage
+the clownfish skeleton is made of bone
+the shark is swimming
+the clownfis is swimming
+
+
+2.#INPUTNYA
+class bear():
+    def Sound(self):
+        print("groaar")
+class dog():
+    def Sound(self):
+        print("gug gug")
+def makeSound(animal):
+    animal.Sound()
+    
+bearObj = bear()
+dogObj = dog()
+
+makeSound(bearObj)
+makeSound(dogObj)
+
+#OUTPUTNYA
+groaar
+gug gug
+
+
+3.#INPUTNYA
+class document:
+    def __init__(self,nama):
+        self.nama = nama
+    def show(self):
+        raise NotImplementedError("subclass must implement abstract method")
+class pdf(document):
+    def show(self):
+        return 'show pdf contental'
+class word(document):
+    def show(self):
+        return 'show pdf contental'
+    
+document = [pdf('document1'),
+           pdf('document2'),
+           word('document3')]
+for document in document:
+    print(document.nama+': '+document.show())
+    
+    
+#OUTPUTNYA
+document1: show pdf contental
+document2: show pdf contental
+document3: show pdf contental
+
+
+4.#INPUTNYA
+class shark():
+    def swim(self):
+        print("the shark is swimming")
+    def swim_backwards(self):
+        print("the shark cannot swim backwards,but can sink backwards")
+    def skeleton(self):
+        print("the shark skeleton is made cartilage")
+class clownfish():
+    def swim(self):
+        print("the clownfis is swimming")
+    def swim_backwards(self):
+        print("the clownfis can swim backwards")
+    def skeleton(self):
+        print("the clownfish skeleton is made of bone")
+sammy = shark()
+cassey = clownfish()
+for fish in (sammy,cassey):
+    fish.swim()
+    fish.swim_backwards()
+    fish.skeleton()
+    
+    
+#OUTPUTNYA
+
+the shark is swimming
+the shark cannot swim backwards,but can sink backwards
+the shark skeleton is made cartilage
+the clownfis is swimming
+the clownfis can swim backwards
+the clownfish skeleton is made of bone
+
